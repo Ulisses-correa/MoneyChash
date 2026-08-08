@@ -1,1 +1,241 @@
-    
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #243b53;
+    background: linear-gradient(135deg, #edf8f4 0%, #eef6ff 100%);
+    min-height: 100vh;
+}
+
+header {
+    background: linear-gradient(120deg, #123524 0%, #1e5842 100%);
+    color: #fff;
+    padding: 28px 24px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+}
+
+header h1 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 6px;
+}
+
+header a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 14px;
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 36px 24px;
+}
+
+.container h2 {
+    margin-top: 28px;
+}
+
+.section-title {
+    font-size: 1.55rem;
+    color: #1f5136;
+    margin: 30px 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #c8eadc;
+}
+
+.btn-navegacao {
+    display: inline-block;
+    background: linear-gradient(135deg, #1f7a54, #256f4f);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.88rem;
+    padding: 10px 15px;
+    border-radius: 10px;
+    margin: 6px 8px 6px 0;
+    border: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    box-shadow: 0 4px 12px rgba(37, 111, 79, 0.16);
+}
+
+.btn-navegacao:hover,
+.btn-navegacao:focus {
+    background: linear-gradient(135deg, #145f47, #0f4f39);
+    transform: translateY(-2px);
+}
+
+.container-formulario {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 36px 24px;
+}
+
+.form-box {
+    background: #fff;
+    border-radius: 18px;
+    padding: 28px;
+    border: 1px solid #d7e9df;
+    box-shadow: 0 10px 35px rgba(27, 85, 58, 0.08);
+}
+
+.form-box h2 {
+    font-size: 1.9rem;
+    color: #173b2b;
+    margin-bottom: 22px;
+}
+
+.form-box h3 {
+    font-size: 1.2rem;
+    color: #2a5c4b;
+    margin: 15px 0 12px;
+}
+
+.form-box p {
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+.form-box form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.form-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.form-grupo label {
+    font-weight: 700;
+    color: #234f41;
+    font-size: 0.88rem;
+}
+
+.form-grupo input,
+.form-grupo textarea,
+.form-grupo select {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #bfd9d2;
+    border-radius: 10px;
+    background: #fafdff;
+    font: inherit;
+    color: #243b53;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-grupo input:focus,
+.form-grupo textarea:focus,
+.form-grupo select:focus {
+    border-color: #2c8f62;
+    box-shadow: 0 0 0 3px rgba(44, 143, 98, 0.18);
+}
+
+.form-grupo textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.btn-enviar {
+    width: fit-content;
+    background: linear-gradient(135deg, #2f9e75, #1b7654);
+    color: #fff;
+    font-weight: 700;
+    padding: 11px 24px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-enviar:hover,
+.btn-enviar:focus {
+    background: linear-gradient(135deg, #217b59, #155b43);
+    box-shadow: 0 8px 20px rgba(39, 112, 78, 0.20);
+}
+
+.tabela {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 14px;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.tabela th {
+    background: #1f6b53;
+    color: #fff;
+    font-weight: 700;
+    text-align: left;
+    padding: 12px 14px;
+}
+
+.tabela td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #d6ebe6;
+    background: #fff;
+}
+
+.tabela tbody tr:nth-child(even) td {
+    background: #eefaf4;
+}
+
+.tabela tbody tr:hover td {
+    background: #dff1e8;
+}
+
+.tabela .btn-navegacao {
+    padding: 8px 12px;
+    font-size: 0.75rem;
+    margin: 2px;
+}
+
+.alerta {
+    padding: 12px 14px;
+    border-radius: 10px;
+    margin-bottom: 14px;
+    font-weight: 600;
+}
+
+.alerta-sucesso {
+    background: #d9f7e8;
+    color: #14563e;
+    border: 1px solid #9adbb8;
+}
+
+.alerta-erro {
+    background: #feecea;
+    color: #a23232;
+    border: 1px solid #f0b6b1;
+}
+
+@media (max-width: 720px) {
+    header {
+        padding: 24px 16px;
+    }
+
+    .container,
+    .container-formulario {
+        padding: 24px 14px;
+    }
+
+    .form-box {
+        padding: 20px;
+    }
+
+    .tabela {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
