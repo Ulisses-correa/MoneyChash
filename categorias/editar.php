@@ -6,24 +6,21 @@ $dbname = 'gestao_financeira';
 $username = 'root';
 $password = '';
 
-$id_categoria = $_GET['id_categoria'] ?? $_POST['id_categoria'] ?? '';
+$id = $_GET['id'] ?? $_POST['id'] ?? '';
 $nome = '';
 $tipo = '';
-$categorias = [];
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $stmt = $pdo->query("SELECT id_categoria, nome, tipo FROM categorias ORDER BY nome");
-    $categorias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     $mensagem_erro = "Erro ao conectar: " . $e->getMessage();
 }
 
-if (!empty($id_categoria)) {
+if (!empty($id)) {
     try {
-        $stmt = $pdo->prepare("SELECT nome, tipo FROM categorias WHERE id_categoria = :id");
-        $stmt->execute([':id' => (int)$id_categoria]);
+        $stmt = $pdo->prepare("SELECT nome, tipo FROM categorias WHERE id = :id");
+        $stmt->execute([':id' => (int)$id]);
         $cat = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($cat) {
             $nome = $cat['nome'];
@@ -34,18 +31,18 @@ if (!empty($id_categoria)) {
     }
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['salvar'])) {
-    $id_categoria = trim($_POST['id_categoria'] ?? '');
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $id = trim($_POST['id'] ?? '');
     $nome = trim($_POST['nome'] ?? '');
     $tipo = trim($_POST['tipo'] ?? '');
 
-    if (empty($id_categoria) || empty($nome) || empty($tipo)) {
+    if (empty($id) || empty($nome) || empty($tipo)) {
         $mensagem_erro = "Preencha todos os campos.";
     } else {
         try {
-            $sql = "UPDATE categorias SET nome = :nome, tipo = :tipo WHERE id_categoria = :id";
+            $sql = "UPDATE categorias SET nome = :nome, tipo = :tipo WHERE id = :id";
             $stmt = $pdo->prepare($sql);
-            $stmt->execute([':nome' => $nome, ':tipo' => $tipo, ':id' => (int)$id_categoria]);
+            $stmt->execute([':nome' => $nome, ':tipo' => $tipo, ':id' => (int)$id]);
             $mensagem_sucesso = "Categoria atualizada com sucesso!";
         } catch (PDOException $e) {
             $mensagem_erro = "Erro ao atualizar: " . $e->getMessage();
@@ -58,53 +55,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['salvar'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Categoria - FinControl</title>
+    <title>Editar Categoria - MoneyChash</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <header>
-        <h1>FinControl - Gestão Financeira</h1>
-        <a href="../index.php" class="btn-navegacao">Voltar para o Início</a>
+        <div class="header-content">
+            <div>
+                <h1>💰 MoneyChash</h1>
+            </div>
+            <div class="header-nav">
+                <a href="../index.php" class="btn-navegacao">🏠 Início</a>
+            </div>
+        </div>
     </header>
     <main class="container-formulario">
+        <a href="listar.php" class="btn-back">← Voltar</a>
         <div class="form-box">
-            <h2>Editar Categoria</h2>
+            <h2>✏️ Editar Categoria</h2>
             <?php if (!empty($mensagem_sucesso)): ?>
-                <div class="alerta alerta-sucesso"><?= htmlspecialchars($mensagem_sucesso) ?></div>
+                <div class="alerta alerta-sucesso">✅ <?= htmlspecialchars($mensagem_sucesso) ?></div>
             <?php endif; ?>
             <?php if (!empty($mensagem_erro)): ?>
-                <div class="alerta alerta-erro"><?= htmlspecialchars($mensagem_erro) ?></div>
+                <div class="alerta alerta-erro">❌ <?= htmlspecialchars($mensagem_erro) ?></div>
             <?php endif; ?>
-            <form action="editar_categoria.php" method="GET">
+            <form action="editar.php" method="POST">
+                <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
                 <div class="form-grupo">
-                    <label for="id_categoria">Selecionar categoria</label>
-                    <select id="id_categoria" name="id_categoria" onchange="this.form.submit()">
-                        <option value="">Selecione</option>
-                        <?php foreach ($categorias as $c): ?>
-                            <option value="<?= $c['id_categoria'] ?>" <?= ($c['id_categoria'] == $id_categoria ? 'selected' : '') ?>>
-                                <?= htmlspecialchars($c['nome']) ?> (<?= $c['tipo'] ?>)
-                            </option>
-                        <?php endforeach; ?>
+                    <label for="nome">Nome da Categoria</label>
+                    <input type="text" id="nome" name="nome" value="<?= htmlspecialchars($nome) ?>" placeholder="Ex: Alimentação, Transporte..." required>
+                </div>
+                <div class="form-grupo">
+                    <label for="tipo">Tipo de Categoria</label>
+                    <select id="tipo" name="tipo" required>
+                        <option value="">Selecione um tipo...</option>
+                        <option value="Receita" <?= ($tipo == 'Receita' ? 'selected' : '') ?>>💸 Receita</option>
+                        <option value="Despesa" <?= ($tipo == 'Despesa' ? 'selected' : '') ?>>💳 Despesa</option>
                     </select>
                 </div>
+                <button type="submit" class="btn-enviar">✅ Salvar Alterações</button>
             </form>
-            <?php if (!empty($id_categoria) && !empty($nome)): ?>
-                <form action="editar_categoria.php" method="POST">
-                    <input type="hidden" name="id_categoria" value="<?= htmlspecialchars($id_categoria) ?>">
-                    <div class="form-grupo">
-                        <label for="nome">Nome</label>
-                        <input type="text" id="nome" name="nome" value="<?= htmlspecialchars($nome) ?>" required>
-                    </div>
-                    <div class="form-grupo">
-                        <label for="tipo">Tipo</label>
-                        <select id="tipo" name="tipo" required>
-                            <option value="Receita" <?= ($tipo == 'Receita' ? 'selected' : '') ?>>Receita</option>
-                            <option value="Despesa" <?= ($tipo == 'Despesa' ? 'selected' : '') ?>>Despesa</option>
-                        </select>
-                    </div>
-                    <button type="submit" name="salvar" class="btn-enviar">Salvar Alterações</button>
-                </form>
-            <?php endif; ?>
         </div>
     </main>
 </body>

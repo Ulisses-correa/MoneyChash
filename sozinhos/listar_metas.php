@@ -25,17 +25,26 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listar Metas - FinControl</title>
+    <title>Listar Metas - MoneyChash</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <header>
-        <h1>FinControl - Gestão Financeira</h1>
-        <a href="../index.php" class="btn-navegacao">Voltar para o Início</a>
+        <div class="header-content">
+            <div>
+                <h1>💰 MoneyChash</h1>
+            </div>
+            <div class="header-nav">
+                <a href="../index.php" class="btn-navegacao">🏠 Início</a>
+            </div>
+        </div>
     </header>
     <main class="container-formulario">
+        <div class="back-button">
+            <a href="../index.php">← Voltar</a>
+        </div>
         <div class="form-box">
-            <h2>Metas Cadastradas</h2>
+            <h2>🎯 Metas Cadastradas</h2>
             <?php if (!empty($mensagem_sucesso)): ?>
                 <div class="alerta alerta-sucesso"><?= htmlspecialchars($mensagem_sucesso) ?></div>
             <?php endif; ?>
@@ -69,8 +78,8 @@ try {
                                 <td><?= htmlspecialchars($m['data_limite']) ?></td>
                                 <td><?= htmlspecialchars($m['status']) ?></td>
                                 <td>
-                                    <a href="editar_meta.php?id_meta=<?= $m['id_meta'] ?>" class="btn-navegacao">Editar</a>
-                                    <a href="excluir_meta.php?id_meta=<?= $m['id_meta'] ?>" class="btn-navegacao">Excluir</a>
+                                    <a href="../index.php" class="btn btn-primary">Editar</a>
+                                    <a href="../index.php" class="btn btn-danger">Excluir</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

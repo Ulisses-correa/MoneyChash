@@ -53,37 +53,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Receita - FinControl</title>
+    <title>Cadastrar Receita - MoneyChash</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <header>
-        <h1>FinControl - Gestão Financeira</h1>
-        <a href="../index.php" class="btn-navegacao">Voltar para o Início</a>
+        <div class="header-content">
+            <div>
+                <h1>💰 MoneyChash</h1>
+            </div>
+            <div class="header-nav">
+                <a href="../index.php" class="btn-navegacao">🏠 Início</a>
+            </div>
+        </div>
     </header>
     <main class="container-formulario">
+        <a href="../index.php" class="btn-back">← Voltar</a>
         <div class="form-box">
-            <h2>Cadastrar Receita</h2>
+            <h2>💸 Registrar Nova Receita</h2>
             <?php if (!empty($mensagem_sucesso)): ?>
-                <div class="alerta alerta-sucesso"><?= htmlspecialchars($mensagem_sucesso) ?></div>
+                <div class="alerta alerta-sucesso">✅ <?= htmlspecialchars($mensagem_sucesso) ?></div>
             <?php endif; ?>
             <?php if (!empty($mensagem_erro)): ?>
-                <div class="alerta alerta-erro"><?= htmlspecialchars($mensagem_erro) ?></div>
+                <div class="alerta alerta-erro">❌ <?= htmlspecialchars($mensagem_erro) ?></div>
             <?php endif; ?>
-            <form action="cadastrar_receita.php" method="POST">
+            <form action="cadastrar.php" method="POST">
                 <div class="form-grupo">
                     <label for="id_usuario">Usuário</label>
                     <select id="id_usuario" name="id_usuario" required>
-                        <option value="">Selecione</option>
+                        <option value="">Selecione um usuário...</option>
                         <?php foreach ($usuarios as $u): ?>
                             <option value="<?= $u['id_usuario'] ?>"><?= htmlspecialchars($u['nome']) ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="form-grupo">
-                    <label for="id_categoria">Categoria (Receita)</label>
+                    <label for="id_categoria">Categoria</label>
                     <select id="id_categoria" name="id_categoria" required>
-                        <option value="">Selecione</option>
+                        <option value="">Selecione uma categoria...</option>
                         <?php foreach ($categorias as $c): ?>
                             <option value="<?= $c['id_categoria'] ?>"><?= htmlspecialchars($c['nome']) ?></option>
                         <?php endforeach; ?>
@@ -91,17 +98,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <div class="form-grupo">
                     <label for="descricao">Descrição</label>
-                    <input type="text" id="descricao" name="descricao">
+                    <input type="text" id="descricao" name="descricao" placeholder="Descrição da receita (opcional)">
                 </div>
                 <div class="form-grupo">
                     <label for="valor">Valor (R$)</label>
-                    <input type="number" step="0.01" id="valor" name="valor" required>
+                    <input type="number" id="valor" name="valor" step="0.01" placeholder="0.00" required>
                 </div>
                 <div class="form-grupo">
-                    <label for="data_receita">Data</label>
+                    <label for="data_receita">Data da Receita</label>
                     <input type="date" id="data_receita" name="data_receita" required>
                 </div>
-                <button type="submit" class="btn-enviar">Cadastrar</button>
+                <button type="submit" class="btn-enviar">✅ Registrar Receita</button>
             </form>
         </div>
     </main>

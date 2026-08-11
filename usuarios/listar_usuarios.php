@@ -21,17 +21,26 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listar Usuários - FinControl</title>
+    <title>Listar Usuários - MoneyChash</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <header>
-        <h1>FinControl - Gestão Financeira</h1>
-        <a href="../index.php" class="btn-navegacao">Voltar para o Início</a>
+        <div class="header-content">
+            <div>
+                <h1>💰 MoneyChash</h1>
+            </div>
+            <div class="header-nav">
+                <a href="../index.php" class="btn-navegacao">🏠 Início</a>
+            </div>
+        </div>
     </header>
     <main class="container-formulario">
+        <div class="back-button">
+            <a href="../index.php">← Voltar</a>
+        </div>
         <div class="form-box">
-            <h2>Usuários Cadastrados</h2>
+            <h2>👥 Usuários Cadastrados</h2>
             <?php if (!empty($mensagem_sucesso)): ?>
                 <div class="alerta alerta-sucesso"><?= htmlspecialchars($mensagem_sucesso) ?></div>
             <?php endif; ?>
@@ -59,8 +68,8 @@ try {
                                 <td><?= htmlspecialchars($u['telefone']) ?></td>
                                 <td><?= htmlspecialchars($u['data_nascimento']) ?></td>
                                 <td>
-                                    <a href="editar_usuario.php?id_usuario=<?= $u['id_usuario'] ?>" class="btn-navegacao">Editar</a>
-                                    <a href="excluir_usuario.php?id_usuario=<?= $u['id_usuario'] ?>" class="btn-navegacao">Excluir</a>
+                                    <a href="../index.php" class="btn btn-primary">Editar</a>
+                                    <a href="excluir.php?id_usuario=<?= $u['id_usuario'] ?>" class="btn btn-danger">Excluir</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

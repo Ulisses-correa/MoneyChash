@@ -26,55 +26,70 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listar Receitas - FinControl</title>
+    <title>Listar Receitas - MoneyChash</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <header>
-        <h1>FinControl - Gestão Financeira</h1>
-        <a href="../index.php" class="btn-navegacao">Voltar para o Início</a>
+        <div class="header-content">
+            <div>
+                <h1>💰 MoneyChash</h1>
+            </div>
+            <div class="header-nav">
+                <a href="../index.php" class="btn-navegacao">🏠 Início</a>
+            </div>
+        </div>
     </header>
     <main class="container-formulario">
+        <a href="../index.php" class="btn-back">← Voltar</a>
         <div class="form-box">
-            <h2>Receitas Cadastradas</h2>
+            <h2>💸 Receitas Cadastradas</h2>
             <?php if (!empty($mensagem_sucesso)): ?>
-                <div class="alerta alerta-sucesso"><?= htmlspecialchars($mensagem_sucesso) ?></div>
+                <div class="alerta alerta-sucesso">✅ <?= htmlspecialchars($mensagem_sucesso) ?></div>
             <?php endif; ?>
             <?php if (!empty($mensagem_erro)): ?>
-                <div class="alerta alerta-erro"><?= htmlspecialchars($mensagem_erro) ?></div>
+                <div class="alerta alerta-erro">❌ <?= htmlspecialchars($mensagem_erro) ?></div>
             <?php endif; ?>
-            <?php if (!empty($receitas)): ?>
-                <table class="tabela">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Usuário</th>
-                            <th>Categoria</th>
-                            <th>Descrição</th>
-                            <th>Valor</th>
-                            <th>Data</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($receitas as $r): ?>
-                            <tr>
-                                <td><?= $r['id_receita'] ?></td>
-                                <td><?= htmlspecialchars($r['usuario']) ?></td>
-                                <td><?= htmlspecialchars($r['categoria']) ?></td>
-                                <td><?= htmlspecialchars($r['descricao']) ?></td>
-                                <td>R$ <?= number_format($r['valor'], 2, ',', '.') ?></td>
-                                <td><?= htmlspecialchars($r['data_receita']) ?></td>
-                                <td>
-                                    <a href="editar_receita.php?id_receita=<?= $r['id_receita'] ?>" class="btn-navegacao">Editar</a>
-                                    <a href="excluir_receita.php?id_receita=<?= $r['id_receita'] ?>" class="btn-navegacao">Excluir</a>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+            
+            <?php if (empty($receitas)): ?>
+                <div class="no-results">
+                    <div class="no-results-icon">📦</div>
+                    <p>Nenhuma receita cadastrada.</p>
+                    <a href="cadastrar.php" class="btn btn-secondary" style="width: fit-content; margin-top: 20px;">Registrar Primeira Receita</a>
+                </div>
             <?php else: ?>
-                <p>Nenhuma receita cadastrada.</p>
+                <div style="overflow-x: auto;">
+                    <table class="tabela">
+                        <thead>
+                            <tr>
+                                <th>Usuário</th>
+                                <th>Categoria</th>
+                                <th>Descrição</th>
+                                <th>Valor</th>
+                                <th>Data</th>
+                                <th style="text-align: center;">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($receitas as $r): ?>
+                                <tr>
+                                    <td><?= htmlspecialchars($r['usuario']) ?></td>
+                                    <td><?= htmlspecialchars($r['categoria']) ?></td>
+                                    <td><?= htmlspecialchars($r['descricao']) ?></td>
+                                    <td><strong style="color: var(--success);">R$ <?= number_format($r['valor'], 2, ',', '.') ?></strong></td>
+                                    <td><?= date('d/m/Y', strtotime($r['data_receita'])) ?></td>
+                                    <td>
+                                        <div class="tabela-acoes" style="justify-content: center;">
+                                            <a href="editar.php?id=<?= $r['id_receita'] ?>" class="btn-editar">✏️ Editar</a>
+                                            <a href="listar.php?excluir=<?= $r['id_receita'] ?>" class="btn-excluir" onclick="return confirm('Tem certeza que deseja excluir?')">🗑️ Excluir</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            <?php endif; ?>
             <?php endif; ?>
         </div>
     </main>

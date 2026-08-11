@@ -45,50 +45,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Conta - FinControl</title>
+    <title>Cadastrar Conta - MoneyChash</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <header>
-        <h1>FinControl - Gestão Financeira</h1>
-        <a href="../index.php" class="btn-navegacao">Voltar para o Início</a>
+        <div class="header-content">
+            <div>
+                <h1>💰 MoneyChash</h1>
+            </div>
+            <div class="header-nav">
+                <a href="../index.php" class="btn-navegacao">🏠 Início</a>
+            </div>
+        </div>
     </header>
     <main class="container-formulario">
+        <a href="../index.php" class="btn-back">← Voltar</a>
         <div class="form-box">
-            <h2>Cadastrar Conta</h2>
+            <h2>🏦 Criar Nova Conta</h2>
             <?php if (!empty($mensagem_sucesso)): ?>
-                <div class="alerta alerta-sucesso"><?= htmlspecialchars($mensagem_sucesso) ?></div>
+                <div class="alerta alerta-sucesso">✅ <?= htmlspecialchars($mensagem_sucesso) ?></div>
             <?php endif; ?>
             <?php if (!empty($mensagem_erro)): ?>
-                <div class="alerta alerta-erro"><?= htmlspecialchars($mensagem_erro) ?></div>
+                <div class="alerta alerta-erro">❌ <?= htmlspecialchars($mensagem_erro) ?></div>
             <?php endif; ?>
-            <form action="cadastrar_conta.php" method="POST">
-                <div class="form-grupo">
-                    <label for="id_usuario">Usuário</label>
-                    <select id="id_usuario" name="id_usuario" required>
-                        <option value="">Selecione</option>
-                        <?php foreach ($usuarios as $u): ?>
-                            <option value="<?= $u['id_usuario'] ?>"><?= htmlspecialchars($u['nome']) ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
+            <form action="cadastrar.php" method="POST">
                 <div class="form-grupo">
                     <label for="nome_conta">Nome da Conta</label>
-                    <input type="text" id="nome_conta" name="nome_conta" required>
+                    <input type="text" id="nome_conta" name="nome_conta" placeholder="Ex: Conta do Itaú, Cartão Crédito..." required>
+                </div>
+                <div class="form-grupo">
+                    <label for="tipo">Tipo de Conta</label>
+                    <select id="tipo" name="tipo" required>
+                        <option value="">Selecione um tipo...</option>
+                        <option value="Corrente">🏦 Conta Corrente</option>
+                        <option value="Poupança">💰 Conta Poupança</option>
+                        <option value="Cartão Crédito">💳 Cartão de Crédito</option>
+                        <option value="Carteira">💼 Carteira</option>
+                    </select>
                 </div>
                 <div class="form-grupo">
                     <label for="saldo">Saldo Inicial</label>
-                    <input type="number" step="0.01" id="saldo" name="saldo" value="0.00" required>
+                    <input type="number" id="saldo" name="saldo" step="0.01" placeholder="0.00" value="0.00" required>
                 </div>
-                <div class="form-grupo">
-                    <label for="tipo">Tipo</label>
-                    <select id="tipo" name="tipo" required>
-                        <option value="Corrente">Corrente</option>
-                        <option value="Poupança">Poupança</option>
-                        <option value="Carteira">Carteira</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn-enviar">Cadastrar</button>
+                <button type="submit" class="btn-enviar">✅ Criar Conta</button>
             </form>
         </div>
     </main>

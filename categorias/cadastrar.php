@@ -36,36 +36,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Categoria - FinControl</title>
+    <title>Cadastrar Categoria - MoneyChash</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <header>
-        <h1>FinControl - Gestão Financeira</h1>
-        <a href="../index.php" class="btn-navegacao">Voltar para o Início</a>
+        <div class="header-content">
+            <div>
+                <h1>💰 MoneyChash</h1>
+            </div>
+            <div class="header-nav">
+                <a href="../index.php" class="btn-navegacao">← Voltar ao Início</a>
+            </div>
+        </div>
     </header>
     <main class="container-formulario">
+        <a href="../index.php" class="btn-back">← Voltar</a>
         <div class="form-box">
-            <h2>Cadastrar Categoria</h2>
+            <h2>Criar Nova Categoria</h2>
             <?php if (!empty($mensagem_sucesso)): ?>
-                <div class="alerta alerta-sucesso"><?= htmlspecialchars($mensagem_sucesso) ?></div>
+                <div class="alerta alerta-sucesso">✅ <?= htmlspecialchars($mensagem_sucesso) ?></div>
             <?php endif; ?>
             <?php if (!empty($mensagem_erro)): ?>
-                <div class="alerta alerta-erro"><?= htmlspecialchars($mensagem_erro) ?></div>
+                <div class="alerta alerta-erro">❌ <?= htmlspecialchars($mensagem_erro) ?></div>
             <?php endif; ?>
-            <form action="cadastrar_categoria.php" method="POST">
+            <form action="cadastrar.php" method="POST">
                 <div class="form-grupo">
                     <label for="nome">Nome da Categoria</label>
-                    <input type="text" id="nome" name="nome" required>
+                    <input type="text" id="nome" name="nome" placeholder="Ex: Alimentação, Transporte..." required>
                 </div>
                 <div class="form-grupo">
-                    <label for="tipo">Tipo</label>
+                    <label for="tipo">Tipo de Categoria</label>
                     <select id="tipo" name="tipo" required>
-                        <option value="Receita">Receita</option>
-                        <option value="Despesa">Despesa</option>
+                        <option value="">Selecione um tipo...</option>
+                        <option value="Receita">💸 Receita</option>
+                        <option value="Despesa">💳 Despesa</option>
                     </select>
                 </div>
-                <button type="submit" class="btn-enviar">Cadastrar</button>
+                <button type="submit" class="btn-enviar">✅ Criar Categoria</button>
             </form>
         </div>
     </main>

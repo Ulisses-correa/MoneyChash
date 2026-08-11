@@ -38,18 +38,27 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relatório Financeiro - FinControl</title>
+    <title>Relatório Financeiro - MoneyChash</title>
     <link rel="stylesheet" href="../style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <header>
-        <h1>FinControl - Gestão Financeira</h1>
-        <a href="../index.php" class="btn-navegacao">Voltar para o Início</a>
+        <div class="header-content">
+            <div>
+                <h1>💰 MoneyChash</h1>
+            </div>
+            <div class="header-nav">
+                <a href="../index.php" class="btn-navegacao">🏠 Início</a>
+            </div>
+        </div>
     </header>
     <main class="container-formulario">
+        <div class="back-button">
+            <a href="../index.php">← Voltar</a>
+        </div>
         <div class="form-box">
-            <h2>Relatório Financeiro</h2>
+            <h2>📈 Relatório Financeiro</h2>
             <?php if (!empty($mensagem_erro)): ?>
                 <div class="alerta alerta-erro"><?= htmlspecialchars($mensagem_erro) ?></div>
             <?php endif; ?>

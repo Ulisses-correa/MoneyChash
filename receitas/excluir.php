@@ -40,24 +40,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Excluir Receita - FinControl</title>
+    <title>Excluir Receita - MoneyChash</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <header>
-        <h1>FinControl - Gestão Financeira</h1>
-        <a href="../index.php" class="btn-navegacao">Voltar para o Início</a>
+        <div class="header-content">
+            <div>
+                <h1>💰 MoneyChash</h1>
+            </div>
+            <div class="header-nav">
+                <a href="../index.php" class="btn-navegacao">🏠 Início</a>
+            </div>
+        </div>
     </header>
     <main class="container-formulario">
+        <div class="back-button">
+            <a href="listar.php">← Voltar</a>
+        </div>
         <div class="form-box">
-            <h2>Excluir Receita</h2>
+            <h2>💸 Excluir Receita</h2>
             <?php if (!empty($mensagem_sucesso)): ?>
                 <div class="alerta alerta-sucesso"><?= htmlspecialchars($mensagem_sucesso) ?></div>
             <?php endif; ?>
             <?php if (!empty($mensagem_erro)): ?>
                 <div class="alerta alerta-erro"><?= htmlspecialchars($mensagem_erro) ?></div>
             <?php endif; ?>
-            <form action="excluir_receita.php" method="POST">
+            <form action="excluir.php" method="POST">
                 <div class="form-grupo">
                     <label for="id_receita">Receita</label>
                     <select id="id_receita" name="id_receita" required>
@@ -67,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <?php endforeach; ?>
                     </select>
                 </div>
-                <button type="submit" class="btn-enviar">Excluir Receita</button>
+                <button type="submit" class="btn btn-danger">Excluir Receita</button>
             </form>
         </div>
     </main>

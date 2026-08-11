@@ -38,17 +38,26 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notificações - FinControl</title>
+    <title>Notificações - MoneyChash</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <header>
-        <h1>FinControl - Gestão Financeira</h1>
-        <a href="../index.php" class="btn-navegacao">Voltar para o Início</a>
+        <div class="header-content">
+            <div>
+                <h1>💰 MoneyChash</h1>
+            </div>
+            <div class="header-nav">
+                <a href="../index.php" class="btn-navegacao">🏠 Início</a>
+            </div>
+        </div>
     </header>
     <main class="container-formulario">
+        <div class="back-button">
+            <a href="../index.php">← Voltar</a>
+        </div>
         <div class="form-box">
-            <h2>Notificações</h2>
+            <h2>🔔 Notificações</h2>
             <?php if (!empty($mensagem_sucesso)): ?>
                 <div class="alerta alerta-sucesso"><?= htmlspecialchars($mensagem_sucesso) ?></div>
             <?php endif; ?>
@@ -77,7 +86,7 @@ try {
                                 <td><?= $n['lida'] ? 'Lida' : 'Não lida' ?></td>
                                 <td>
                                     <?php if (!$n['lida']): ?>
-                                        <a href="notificacoes.php?marcar_lida=<?= $n['id_notificacao'] ?>" class="btn-navegacao">Marcar como lida</a>
+                                        <a href="notificações.php?marcar_lida=<?= $n['id_notificacao'] ?>" class="btn btn-primary">Marcar como lida</a>
                                     <?php endif; ?>
                                 </td>
                             </tr>
