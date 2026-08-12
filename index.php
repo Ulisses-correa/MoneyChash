@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FinControl - Gestão Financeira</title>
+    <title>Moneycash - Gestão Financeira</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>FinControl - Gestão Financeira Pessoal</h1>
+        <h1>Moneycash - Gestão Financeira Pessoal</h1>
     </header>
     <main class="container">
         <h2 class="section-title">Usuários</h2>
