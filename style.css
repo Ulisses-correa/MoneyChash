@@ -1,41 +1,131 @@
+/* =========================================================
+   MoneyCash — Gestão Financeira Pessoal
+   Stylesheet global (mantém as mesmas classes usadas nos .php)
+   ========================================================= */
+
+:root {
+    --brand-900: #0b2e23;
+    --brand-800: #0f3d2c;
+    --brand-700: #14543a;
+    --brand-600: #1a6b48;
+    --brand-500: #1f8257;
+    --brand-400: #2fa06f;
+    --brand-100: #e4f5ec;
+    --brand-50:  #f2fbf6;
+
+    --ink-900: #101828;
+    --ink-700: #344054;
+    --ink-500: #667085;
+    --ink-300: #d0d5dd;
+    --ink-100: #eef1f5;
+
+    --danger-500: #d92d20;
+    --danger-100: #fef1f0;
+    --danger-border: #f3b8b3;
+
+    --success-500: #12805c;
+    --success-100: #e3f8ee;
+    --success-border: #9fdfc0;
+
+    --surface: #ffffff;
+    --bg: #f4f7f6;
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+
+    --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.06);
+    --shadow-md: 0 6px 20px rgba(16, 40, 30, 0.08);
+    --shadow-lg: 0 16px 40px rgba(11, 46, 35, 0.12);
+
+    --transition: 180ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------- Reset básico ---------- */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    color: #243b53;
-    background: linear-gradient(135deg, #edf8f4 0%, #eef6ff 100%);
-    min-height: 100vh;
+html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
+body {
+    font-family: "Inter", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+    color: var(--ink-700);
+    background: var(--bg);
+    min-height: 100vh;
+    line-height: 1.5;
+}
+
+a {
+    color: inherit;
+}
+
+/* ---------- Cabeçalho ---------- */
 header {
-    background: linear-gradient(120deg, #123524 0%, #1e5842 100%);
+    background: linear-gradient(125deg, var(--brand-900) 0%, var(--brand-600) 100%);
     color: #fff;
-    padding: 28px 24px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+    padding: 32px 40px;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 85% -20%, rgba(255, 255, 255, 0.14) 0%, transparent 55%),
+        radial-gradient(circle at 10% 120%, rgba(255, 255, 255, 0.08) 0%, transparent 45%);
+    pointer-events: none;
 }
 
 header h1 {
-    font-size: clamp(2rem, 4vw, 2.8rem);
+    position: relative;
+    font-size: clamp(1.6rem, 3vw, 2.3rem);
     font-weight: 700;
-    letter-spacing: -0.03em;
-    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+}
+
+header h1::before {
+    content: "💰 ";
 }
 
 header a {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-top: 14px;
+    gap: 6px;
+    margin-top: 16px;
 }
 
+header a.btn-navegacao {
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    backdrop-filter: blur(4px);
+    box-shadow: none;
+}
+
+header a.btn-navegacao::before {
+    content: "←";
+}
+
+header a.btn-navegacao:hover {
+    background: rgba(255, 255, 255, 0.24);
+    transform: translateY(-1px);
+}
+
+/* ---------- Layout principal ---------- */
 .container {
     max-width: 1280px;
     margin: 0 auto;
-    padding: 36px 24px;
+    padding: 40px 40px 64px;
 }
 
 .container h2 {
@@ -43,102 +133,169 @@ header a {
 }
 
 .section-title {
-    font-size: 1.55rem;
-    color: #1f5136;
-    margin: 30px 0 12px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid #c8eadc;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--brand-800);
+    letter-spacing: -0.01em;
+    margin: 36px 0 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--ink-100);
 }
 
+.section-title::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--brand-500);
+    flex-shrink: 0;
+}
+
+/* ---------- Botões de navegação (cartões de ação) ---------- */
 .btn-navegacao {
-    display: inline-block;
-    background: linear-gradient(135deg, #1f7a54, #256f4f);
-    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--surface);
+    color: var(--brand-700);
     text-decoration: none;
     font-weight: 600;
-    font-size: 0.88rem;
-    padding: 10px 15px;
-    border-radius: 10px;
-    margin: 6px 8px 6px 0;
-    border: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-    box-shadow: 0 4px 12px rgba(37, 111, 79, 0.16);
+    font-size: 0.85rem;
+    padding: 11px 18px;
+    border-radius: var(--radius-sm);
+    margin: 5px 8px 5px 0;
+    border: 1px solid var(--ink-100);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition), box-shadow var(--transition),
+        background var(--transition), border-color var(--transition), color var(--transition);
 }
 
 .btn-navegacao:hover,
-.btn-navegacao:focus {
-    background: linear-gradient(135deg, #145f47, #0f4f39);
+.btn-navegacao:focus-visible {
+    background: var(--brand-500);
+    color: #fff;
+    border-color: var(--brand-500);
     transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(31, 130, 87, 0.24);
+    outline: none;
 }
 
+.btn-navegacao:active {
+    transform: translateY(0);
+}
+
+/* ---------- Formulários ---------- */
 .container-formulario {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 36px 24px;
+    padding: 40px 24px 64px;
 }
 
 .form-box {
-    background: #fff;
-    border-radius: 18px;
-    padding: 28px;
-    border: 1px solid #d7e9df;
-    box-shadow: 0 10px 35px rgba(27, 85, 58, 0.08);
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: 36px;
+    border: 1px solid var(--ink-100);
+    box-shadow: var(--shadow-lg);
 }
 
 .form-box h2 {
-    font-size: 1.9rem;
-    color: #173b2b;
-    margin-bottom: 22px;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--brand-900);
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+}
+
+.form-box h2::after {
+    content: "";
+    display: block;
+    width: 48px;
+    height: 4px;
+    margin-top: 12px;
+    margin-bottom: 10px;
+    border-radius: 999px;
+    background: var(--brand-400);
 }
 
 .form-box h3 {
-    font-size: 1.2rem;
-    color: #2a5c4b;
-    margin: 15px 0 12px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--brand-700);
+    margin: 18px 0 10px;
 }
 
 .form-box p {
     margin: 8px 0;
     line-height: 1.6;
+    color: var(--ink-700);
 }
 
 .form-box form {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 18px;
+    margin-top: 20px;
 }
 
 .form-grupo {
     display: flex;
     flex-direction: column;
-    gap: 7px;
+    gap: 6px;
 }
 
 .form-grupo label {
-    font-weight: 700;
-    color: #234f41;
-    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--ink-700);
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
 }
 
 .form-grupo input,
 .form-grupo textarea,
 .form-grupo select {
     width: 100%;
-    padding: 11px 12px;
-    border: 1px solid #bfd9d2;
-    border-radius: 10px;
-    background: #fafdff;
+    padding: 12px 14px;
+    border: 1px solid var(--ink-300);
+    border-radius: var(--radius-sm);
+    background: var(--bg);
     font: inherit;
-    color: #243b53;
+    color: var(--ink-900);
     outline: none;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+.form-grupo input::placeholder,
+.form-grupo textarea::placeholder {
+    color: var(--ink-500);
+}
+
+.form-grupo input:hover,
+.form-grupo textarea:hover,
+.form-grupo select:hover {
+    border-color: var(--ink-500);
 }
 
 .form-grupo input:focus,
 .form-grupo textarea:focus,
 .form-grupo select:focus {
-    border-color: #2c8f62;
-    box-shadow: 0 0 0 3px rgba(44, 143, 98, 0.18);
+    background: var(--surface);
+    border-color: var(--brand-500);
+    box-shadow: 0 0 0 4px rgba(31, 130, 87, 0.14);
+}
+
+.form-grupo select {
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--ink-500) 50%),
+        linear-gradient(135deg, var(--ink-500) 50%, transparent 50%);
+    background-position: calc(100% - 20px) calc(50% - 3px), calc(100% - 15px) calc(50% - 3px);
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+    padding-right: 36px;
 }
 
 .form-grupo textarea {
@@ -146,91 +303,159 @@ header a {
     resize: vertical;
 }
 
+/* ---------- Botão de envio ---------- */
 .btn-enviar {
     width: fit-content;
-    background: linear-gradient(135deg, #2f9e75, #1b7654);
+    background: linear-gradient(135deg, var(--brand-500), var(--brand-700));
     color: #fff;
     font-weight: 700;
-    padding: 11px 24px;
-    border-radius: 10px;
+    font-size: 0.92rem;
+    padding: 12px 28px;
+    border-radius: var(--radius-sm);
     border: none;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    letter-spacing: 0.01em;
+    box-shadow: 0 8px 20px rgba(20, 84, 58, 0.22);
+    transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
 }
 
 .btn-enviar:hover,
-.btn-enviar:focus {
-    background: linear-gradient(135deg, #217b59, #155b43);
-    box-shadow: 0 8px 20px rgba(39, 112, 78, 0.20);
+.btn-enviar:focus-visible {
+    filter: brightness(1.06);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(20, 84, 58, 0.28);
+    outline: none;
 }
 
+.btn-enviar:active {
+    transform: translateY(0);
+}
+
+/* ---------- Tabelas ---------- */
 .tabela {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 14px;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 18px;
+    background: var(--surface);
+    border-radius: var(--radius-md);
     overflow: hidden;
-    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--ink-100);
 }
 
 .tabela th {
-    background: #1f6b53;
+    background: var(--brand-800);
     color: #fff;
-    font-weight: 700;
+    font-weight: 600;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
     text-align: left;
-    padding: 12px 14px;
+    padding: 14px 16px;
 }
 
 .tabela td {
-    padding: 12px 14px;
-    border-bottom: 1px solid #d6ebe6;
-    background: #fff;
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--ink-100);
+    background: var(--surface);
+    font-size: 0.92rem;
+    color: var(--ink-700);
+}
+
+.tabela tbody tr:last-child td {
+    border-bottom: none;
 }
 
 .tabela tbody tr:nth-child(even) td {
-    background: #eefaf4;
+    background: var(--brand-50);
 }
 
 .tabela tbody tr:hover td {
-    background: #dff1e8;
+    background: var(--brand-100);
 }
 
 .tabela .btn-navegacao {
-    padding: 8px 12px;
+    padding: 7px 12px;
     font-size: 0.75rem;
     margin: 2px;
+    box-shadow: none;
 }
 
+/* ---------- Alertas ---------- */
 .alerta {
-    padding: 12px 14px;
-    border-radius: 10px;
-    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 16px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 18px;
     font-weight: 600;
+    font-size: 0.9rem;
 }
 
 .alerta-sucesso {
-    background: #d9f7e8;
-    color: #14563e;
-    border: 1px solid #9adbb8;
+    background: var(--success-100);
+    color: var(--success-500);
+    border: 1px solid var(--success-border);
+}
+
+.alerta-sucesso::before {
+    content: "✓";
 }
 
 .alerta-erro {
-    background: #feecea;
-    color: #a23232;
-    border: 1px solid #f0b6b1;
+    background: var(--danger-100);
+    color: var(--danger-500);
+    border: 1px solid var(--danger-border);
 }
 
+.alerta-erro::before {
+    content: "!";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--danger-500);
+    color: #fff;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+}
+
+/* ---------- Scrollbar (opcional, navegadores baseados em WebKit) ---------- */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--ink-300);
+    border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--ink-500);
+}
+
+/* ---------- Responsivo ---------- */
 @media (max-width: 720px) {
     header {
-        padding: 24px 16px;
+        padding: 24px 20px;
     }
 
     .container,
     .container-formulario {
-        padding: 24px 14px;
+        padding: 28px 18px 48px;
     }
 
     .form-box {
-        padding: 20px;
+        padding: 22px;
     }
 
     .tabela {
